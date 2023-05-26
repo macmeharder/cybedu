@@ -4,7 +4,6 @@ import {
   $registerForm,
   firstRegistrationFormSubmitted,
   secondRegistrationFormSubmitted,
-  thirdRegistrationFormSubmitted,
 } from "~/features/registration";
 
 import { routes } from "~/shared/routing";
@@ -29,15 +28,10 @@ sample({
 });
 
 sample({
-  source: $registerForm,
   clock: routes.register_3.opened,
+  source: $registerForm,
   filter: function (source) {
     return source === null;
   },
   target: routes.register_1.open,
-});
-
-sample({
-  clock: thirdRegistrationFormSubmitted,
-  target: routes.home.open,
 });

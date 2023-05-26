@@ -34,5 +34,5 @@ sample({
   fn: function ({ result }) {
     return result.token;
   },
-  target: tokenChanged,
+  target: [tokenChanged, routes.home.open],
 });

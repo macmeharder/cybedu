@@ -1,8 +1,7 @@
 import { RouterProvider } from "atomic-router-react";
-
 import { RoutesView } from "~/pages";
 
-import { router } from "../shared/routing";
+import { router } from "~/shared/routing";
 
 export function Application() {
   return (

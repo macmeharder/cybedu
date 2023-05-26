@@ -28,13 +28,13 @@ export function chainAuthorized<Params extends RouteParams>(
   const sessionCheckStarted = createEvent<RouteParamsAndQuery<Params>>();
 
   const alreadyAuthenticated = sample({
-    clock: [sessionCheckStarted, $token],
+    clock: sessionCheckStarted,
     source: $token,
     filter: (source) => Boolean(source),
   });
 
   const alreadyAnonymous = sample({
-    clock: [sessionCheckStarted, $token],
+    clock: sessionCheckStarted,
     source: $token,
     filter: (source) => !Boolean(source),
   });
@@ -61,13 +61,13 @@ export function chainAnonymous<Params extends RouteParams>(
   const sessionCheckStarted = createEvent<RouteParamsAndQuery<Params>>();
 
   const alreadyAuthenticated = sample({
-    clock: [sessionCheckStarted, $token],
+    clock: sessionCheckStarted,
     source: $token,
     filter: (source) => Boolean(source),
   });
 
   const alreadyAnonymous = sample({
-    clock: [sessionCheckStarted, $token],
+    clock: sessionCheckStarted,
     source: $token,
     filter: (source) => !Boolean(source),
   });
