@@ -1,13 +1,26 @@
 import { createMutation } from "@farfetched/core";
 
-import { request } from "~/shared/request";
+import { ISession } from "~/shared/session";
 
-export const registerMutation = createMutation<any, any>({
-  handler: async ({ ...body }) => {
+import { request } from "./request.ts";
+
+export interface IRegistrationParams {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  first_name?: string;
+  last_name?: string;
+}
+
+export const registerMutation = createMutation<IRegistrationParams, ISession>({
+  handler: async ({ confirmPassword, ...body }) => {
     return request({
       method: "POST",
       endpoint: "/auth/register",
-      body,
+      body: {
+        ...body,
+        gender: "Male",
+      },
     });
   },
 });

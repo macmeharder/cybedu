@@ -23,6 +23,20 @@ module.exports = {
           },
         },
       },
+      animation: {
+        loader: "loader 1000ms ease infinite",
+        loader2: "loader 1000ms ease infinite reverse",
+      },
+      keyframes: {
+        loader: {
+          "0%, 100%": {
+            transform: "scaleY(0.5)",
+          },
+          "50%": {
+            transform: "scaleY(1.2)",
+          },
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-safe-area"), require("@tailwindcss/forms")],

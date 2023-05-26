@@ -16,7 +16,7 @@ export const routes = {
   forgot_password: createRoute(),
 
   home: createRoute(),
-  section: createRoute<{ id: string }>(),
+  subject: createRoute<{ id: string }>(),
   section_lesson: createRoute<{ id: string }>(),
   section_test: createRoute<{ id: string }>(),
 
@@ -38,7 +38,7 @@ export const router = createHistoryRouter({
     { path: "/forgot-password", route: routes.forgot_password },
 
     { path: "/", route: routes.home },
-    { path: "/section/:id", route: routes.section },
+    { path: "/subject/:id", route: routes.subject },
     { path: "/section/:id/lesson", route: routes.section_lesson },
     { path: "/section/:id/answer", route: routes.section_test },
 

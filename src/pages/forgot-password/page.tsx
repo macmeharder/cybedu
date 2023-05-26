@@ -3,14 +3,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { forgotFormSubmitted } from "~/pages/forgot-password/model.ts";
+
 import { Button } from "~/shared/ui/button";
 import { Input } from "~/shared/ui/input";
-import { Logotype } from "~/shared/ui/logotype.tsx";
 
 export function ForgotPasswordPage() {
   return (
     <div className="flex h-full flex-col items-center gap-6">
-      <Logotype className="mb-8 mt-20" />
       <Form />
     </div>
   );
@@ -32,10 +31,10 @@ export function Form() {
         <Button onClick={() => setState(true)}>Восстановить пароль</Button>
       </form>
       {state && (
-        <p className="rounded-2xl bg-green-200 p-4 text-sm text-green-500">
+        <p className="rounded-2xl bg-green-100 p-4 text-sm text-green-600">
           На почту <span className="text-ce-purple">name@mail.com</span> была
           выслана инструкция по изменению пароля. Пожалуйста, проверьте свою
-          почту
+          почту.
         </p>
       )}
     </div>

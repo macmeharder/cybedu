@@ -1,4 +1,4 @@
-import { AnonymousLayout } from "~/widgets/layouts/anonymous/anonymous-layout.tsx";
+import { AnonymousLayout } from "~/widgets/layouts/anonymous-layout.tsx";
 
 import { currentRoute } from "./model.ts";
 import { LoginPage } from "./page.tsx";

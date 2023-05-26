@@ -1,3 +1,4 @@
+import { chainRoute } from "atomic-router";
 import { sample } from "effector";
 
 import {
@@ -6,14 +7,14 @@ import {
   headNavigationRightChanged,
 } from "~/features/head-navigation/model.tsx";
 
+import { getSubjectsQuery } from "~/entities/subject/api.ts";
+
 import { routes } from "~/shared/routing/routing.ts";
-import { chainAnonymous } from "~/shared/session";
+import { chainAuthorized } from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
-export const currentRoute = routes.register_1;
-
-chainAnonymous(currentRoute, { otherwise: routes.home.open });
+export const currentRoute = routes.home;
 
 sample({
   clock: currentRoute.opened,
@@ -22,4 +23,14 @@ sample({
     headNavigationCenterChanged.prepend(Center),
     headNavigationRightChanged.prepend(Right),
   ],
+});
+
+export const authorizedRoute = chainAuthorized(currentRoute, {
+  otherwise: routes.login.open,
+});
+
+export const subjectsLoadedRoute = chainRoute({
+  route: authorizedRoute,
+  beforeOpen: getSubjectsQuery.start,
+  openOn: getSubjectsQuery.finished.success,
 });

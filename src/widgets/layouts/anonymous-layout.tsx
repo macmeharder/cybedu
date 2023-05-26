@@ -1,8 +1,10 @@
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet";
 
-import { HEAD_NAVIGATION_COLOR } from "~/shared/features/bottom-navigation/bottom-navigation.tsx";
-import { HeadNavigation } from "~/shared/features/head-navigation";
+import {
+  HEAD_NAVIGATION_COLOR,
+  HeadNavigation,
+} from "~/features/head-navigation";
 
 export function AnonymousLayout({ children }: { children: ReactNode }) {
   return (

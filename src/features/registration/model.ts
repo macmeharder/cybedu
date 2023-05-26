@@ -1,5 +1,8 @@
 import { createEvent, createStore, sample } from "effector";
 
+import { registerMutation } from "~/shared/api/register.ts";
+import { tokenChanged } from "~/shared/session";
+
 export interface IFirstRegistrationForm {
   first_name: string;
   last_name: string;
@@ -41,22 +44,18 @@ $registerForm.on(secondRegistrationFormSubmitted, (source, payload) => ({
   ...payload,
 }));
 
-export const registerCodeRequested = createEvent();
-
 sample({
+  clock: thirdRegistrationFormSubmitted,
   source: $registerForm,
-  clock: registerCodeRequested,
-  // fn: function (source) {
-  // delete source?.confirmPassword;
-  // return { ...source, gender: "Male" };
-  // },
-  // target: registerMutation.start,
+  filter: (source) => source !== null,
+  fn: (source) => source!,
+  target: registerMutation.start,
 });
 
-// sample({
-// clock: registerMutation.finished.success,
-// fn: function ({ result }) {
-//   return result.token;
-// },
-// target: setTokenEv,
-// });
+sample({
+  clock: registerMutation.finished.success,
+  fn: function ({ result }) {
+    return result.token;
+  },
+  target: tokenChanged,
+});

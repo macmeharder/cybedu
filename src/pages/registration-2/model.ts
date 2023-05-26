@@ -4,12 +4,16 @@ import {
   headNavigationCenterChanged,
   headNavigationLeftChanged,
   headNavigationRightChanged,
-} from "~/shared/features/head-navigation/model.tsx";
+} from "~/features/head-navigation/model.tsx";
+
 import { routes } from "~/shared/routing/routing.ts";
+import { chainAnonymous } from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
 export const currentRoute = routes.register_2;
+
+chainAnonymous(currentRoute, { otherwise: routes.home.open });
 
 sample({
   clock: currentRoute.opened,

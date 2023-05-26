@@ -1,13 +1,14 @@
 import { createEffect, sample } from "effector";
 
-import { ILoginMutationParams, loginMutation } from "~/shared/api/login.ts";
 import {
   headNavigationCenterChanged,
   headNavigationLeftChanged,
   headNavigationRightChanged,
-} from "~/shared/features/head-navigation/model.tsx";
+} from "~/features/head-navigation/model.tsx";
+
+import { ILoginMutationParams, loginMutation } from "~/shared/api/login.ts";
 import { routes } from "~/shared/routing/routing.ts";
-import { tokenChanged } from "~/shared/session";
+import { chainAnonymous, tokenChanged } from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
@@ -21,6 +22,8 @@ sample({
     headNavigationRightChanged.prepend(Right),
   ],
 });
+
+chainAnonymous(currentRoute, { otherwise: routes.home.open });
 
 export const submitLoginFormFx = createEffect<ILoginMutationParams, void>(
   loginMutation.start
