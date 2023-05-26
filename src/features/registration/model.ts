@@ -15,11 +15,12 @@ export interface ISecondRegistrationForm {
 export const secondRegistrationFormSubmitted =
   createEvent<ISecondRegistrationForm>();
 
-export interface ISecondRegistrationForm {
+export interface IThirdRegistrationForm {
   code: string;
 }
 
-export const thirdRegistrationFormSubmitted = createEvent();
+export const thirdRegistrationFormSubmitted =
+  createEvent<IThirdRegistrationForm>();
 
 export interface IRegistrationForm {
   email?: string;
