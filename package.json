@@ -1,0 +1,44 @@
+{
+  "name": "cybedu",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@farfetched/core": "^0.8.12",
+    "@farfetched/react": "^0.5.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "atomic-router": "^0.8.0",
+    "atomic-router-react": "^0.8.3",
+    "clsx": "^1.2.1",
+    "effector": "^22.8.6",
+    "effector-react": "^22.5.3",
+    "effector-storage": "^6.0.1",
+    "history": "^5.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.43.9",
+    "vite-plugin-svgr": "^3.2.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-helmet": "^6.1.6",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "tailwindcss": "^3.3.2",
+    "tailwindcss-safe-area": "^0.2.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2",
+    "vite-plugin-pwa": "^0.15.1"
+  }
+}
