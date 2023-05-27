@@ -8,7 +8,7 @@ import {
 
 import { ILoginMutationParams, loginMutation } from "~/shared/api/login.ts";
 import { routes } from "~/shared/routing/routing.ts";
-import { chainAnonymous, tokenChanged } from "~/shared/session";
+import { chainAnonymous, setTokenFx } from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
@@ -34,5 +34,5 @@ sample({
   fn: function ({ result }) {
     return result.token;
   },
-  target: [tokenChanged, routes.home.open],
+  target: setTokenFx,
 });

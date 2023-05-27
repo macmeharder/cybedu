@@ -1,5 +1,5 @@
-import { chainRoute } from "atomic-router";
-import { sample } from "effector";
+import { chainRoute, RouteParamsAndQuery } from "atomic-router";
+import { createEvent, sample } from "effector";
 
 import {
   headNavigationCenterChanged,
@@ -29,8 +29,17 @@ export const authorizedRoute = chainAuthorized(currentRoute, {
   otherwise: routes.login.open,
 });
 
+const getSubjectsStarted = createEvent<RouteParamsAndQuery<{}>>();
+
+sample({
+  clock: getSubjectsStarted,
+  source: getSubjectsQuery.$pending,
+  filter: (pending) => !pending,
+  target: getSubjectsQuery.start,
+});
+
 export const subjectsLoadedRoute = chainRoute({
   route: authorizedRoute,
-  beforeOpen: getSubjectsQuery.start,
+  beforeOpen: getSubjectsStarted,
   openOn: getSubjectsQuery.finished.success,
 });

@@ -1,8 +1,7 @@
 import { createEvent, createStore, sample } from "effector";
 
 import { registerMutation } from "~/shared/api/register.ts";
-import { routes } from "~/shared/routing";
-import { tokenChanged } from "~/shared/session";
+import { setTokenFx } from "~/shared/session";
 
 export interface IFirstRegistrationForm {
   first_name: string;
@@ -58,5 +57,5 @@ sample({
   fn: function ({ result }) {
     return result.token;
   },
-  target: [tokenChanged, routes.home.open],
+  target: setTokenFx,
 });
