@@ -2,7 +2,7 @@ import { Link } from "atomic-router-react";
 import { useUnit } from "effector-react";
 import { useForm } from "react-hook-form";
 
-import { submitLoginFormFx } from "~/pages/login/model.ts";
+import { submitLoginFormFx } from "~/pages/login/model.tsx";
 
 import { ILoginMutationParams } from "~/shared/api/login.ts";
 import { routes } from "~/shared/routing";

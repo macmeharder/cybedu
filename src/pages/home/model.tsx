@@ -19,9 +19,9 @@ export const currentRoute = routes.home;
 sample({
   clock: currentRoute.opened,
   target: [
-    headNavigationLeftChanged.prepend(Left),
-    headNavigationCenterChanged.prepend(Center),
-    headNavigationRightChanged.prepend(Right),
+    headNavigationLeftChanged.prepend(() => <Left />),
+    headNavigationCenterChanged.prepend(() => <Center />),
+    headNavigationRightChanged.prepend(() => <Right />),
   ],
 });
 
@@ -29,10 +29,10 @@ export const authorizedRoute = chainAuthorized(currentRoute, {
   otherwise: routes.login.open,
 });
 
-const getSubjectsStarted = createEvent<RouteParamsAndQuery<{}>>();
+const loadData = createEvent<RouteParamsAndQuery<{}>>();
 
 sample({
-  clock: getSubjectsStarted,
+  clock: loadData,
   source: getSubjectsQuery.$pending,
   filter: (pending) => !pending,
   target: getSubjectsQuery.start,
@@ -40,6 +40,6 @@ sample({
 
 export const subjectsLoadedRoute = chainRoute({
   route: authorizedRoute,
-  beforeOpen: getSubjectsStarted,
+  beforeOpen: loadData,
   openOn: getSubjectsQuery.finished.success,
 });

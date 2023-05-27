@@ -2,7 +2,7 @@ import { useUnit } from "effector-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { forgotFormSubmitted } from "~/pages/forgot-password/model.ts";
+import { forgotFormSubmitted } from "~/pages/forgot-password/model.tsx";
 
 import { Button } from "~/shared/ui/button";
 import { Input } from "~/shared/ui/input";

@@ -5,7 +5,7 @@ import { $subjects } from "~/entities/subject/model.ts";
 import { routes } from "~/shared/routing";
 import { SubjectItem } from "~/shared/ui/subject-item.tsx";
 
-// const subjects = [
+// const subject = [
 //   {
 //     id: "4",
 //     lesson: true,

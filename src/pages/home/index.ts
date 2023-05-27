@@ -4,7 +4,11 @@ import { CabinetLayout } from "~/widgets/layouts/cabinet-layout.tsx";
 
 import { PageLoader } from "~/shared/ui/page-loader.tsx";
 
-import { authorizedRoute, currentRoute, subjectsLoadedRoute } from "./model.ts";
+import {
+  authorizedRoute,
+  currentRoute,
+  subjectsLoadedRoute,
+} from "./model.tsx";
 import { HomePage } from "./page.tsx";
 
 const SubjectsLoadedRouteView = createRouteView({

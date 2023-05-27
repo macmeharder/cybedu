@@ -18,9 +18,9 @@ chainAnonymous(currentRoute, { otherwise: routes.home.open });
 sample({
   clock: currentRoute.opened,
   target: [
-    headNavigationLeftChanged.prepend(Left),
-    headNavigationCenterChanged.prepend(Center),
-    headNavigationRightChanged.prepend(Right),
+    headNavigationLeftChanged.prepend(() => <Left />),
+    headNavigationCenterChanged.prepend(() => <Center />),
+    headNavigationRightChanged.prepend(() => <Right />),
   ],
 });
 

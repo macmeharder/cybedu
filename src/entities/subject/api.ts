@@ -12,3 +12,12 @@ export const getSubjectsQuery = createQuery<any, { subjects: ISubject[] }>({
     });
   },
 });
+
+export const getSubjectQuery = createQuery<{ id: string }, ISubject>({
+  handler: async function ({ id }) {
+    return await request({
+      endpoint: `/subjects/${id}`,
+      method: "GET",
+    });
+  },
+});

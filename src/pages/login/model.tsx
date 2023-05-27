@@ -17,9 +17,9 @@ export const currentRoute = routes.login;
 sample({
   clock: currentRoute.opened,
   target: [
-    headNavigationLeftChanged.prepend(Left),
-    headNavigationCenterChanged.prepend(Center),
-    headNavigationRightChanged.prepend(Right),
+    headNavigationLeftChanged.prepend(() => <Left />),
+    headNavigationCenterChanged.prepend(() => <Center />),
+    headNavigationRightChanged.prepend(() => <Right />),
   ],
 });
 
