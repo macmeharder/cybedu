@@ -1,6 +1,6 @@
 import { createStore, sample } from "effector";
 
-import { getSubjectQuery, getSubjectsQuery } from "./api";
+import { getSubjectsQuery } from "./api";
 
 export interface ISubject {
   id: number;
@@ -15,23 +15,4 @@ sample({
     return result.subjects;
   },
   target: $subjects,
-});
-
-export interface ISubject {
-  id: number;
-  name: string;
-  short_description: string;
-}
-export const $subject = createStore<ISubject>({
-  id: 0,
-  name: "",
-  short_description: "",
-});
-
-sample({
-  clock: getSubjectQuery.finished.success,
-  fn: function ({ result }) {
-    return result;
-  },
-  target: $subject,
 });
