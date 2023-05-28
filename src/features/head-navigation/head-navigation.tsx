@@ -37,7 +37,5 @@ function Center() {
 function Right() {
   const right = useUnit($headNavigationRight);
 
-  if (!right) return null
-
-  return <>{right()}</>;
+  return <>{right}</>;
 }

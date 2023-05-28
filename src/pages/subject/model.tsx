@@ -17,14 +17,13 @@ import { Center, Left, Right } from "./views.tsx";
 
 export const currentRoute = routes.subject;
 
-
 sample({
   clock: currentRoute.opened,
   source: $subject,
   target: [
     headNavigationLeftChanged.prepend(() => <Left />),
     headNavigationCenterChanged.prepend(() => <Center />),
-    headNavigationRightChanged.prepend(()=>Right),
+    headNavigationRightChanged.prepend(() => <Right />),
   ],
 });
 
