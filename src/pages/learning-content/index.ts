@@ -1,14 +1,15 @@
 import { createRouteView } from "atomic-router-react";
 
+import { LearningContentPage } from "~/pages/learning-content/page.tsx";
+
 import { CabinetLayout } from "~/widgets/layouts/cabinet-layout.tsx";
 
 import { PageLoader } from "~/shared/ui/page-loader.tsx";
 
 import { authorizedRoute, currentRoute, dataLoadedRoute } from "./model.tsx";
-import { TopicPage } from "./page.tsx";
 
 const DataLoadedRouteView = createRouteView<unknown, { id: string }, any>({
-  view: TopicPage,
+  view: LearningContentPage,
   route: dataLoadedRoute,
   otherwise: PageLoader,
 });
@@ -19,7 +20,7 @@ const AuthorizedRoute = createRouteView<unknown, { id: string }, any>({
   otherwise: PageLoader,
 });
 
-export const TopicRoute = {
+export const LearningContentRoute = {
   view: AuthorizedRoute,
   route: currentRoute,
   layout: CabinetLayout,

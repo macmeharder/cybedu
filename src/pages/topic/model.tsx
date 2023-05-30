@@ -43,7 +43,7 @@ sample({
   target: getTopicQuery.start,
 });
 
-export const topicLoadedRoute = chainRoute({
+export const dataLoadedRoute = chainRoute({
   route: authorizedRoute,
   beforeOpen: loadData,
   openOn: getTopicQuery.finished.success,

@@ -1,31 +1,26 @@
-import { createRoutesView, createRouteView } from "atomic-router-react";
+import { createRouteView } from "atomic-router-react";
 
 import { CabinetLayout } from "~/widgets/layouts/cabinet-layout.tsx";
 
 import { PageLoader } from "~/shared/ui/page-loader.tsx";
 
-import {
-  authorizedRoute,
-  currentRoute,
-  subjectsLoadedRoute,
-} from "./model.tsx";
+import { authorizedRoute, currentRoute, dataLoadedRoute } from "./model.tsx";
 import { HomePage } from "./page.tsx";
 
-const SubjectsLoadedRouteView = createRouteView({
+const DataLoadedRouteView = createRouteView<unknown, { id: string }, any>({
   view: HomePage,
-  route: subjectsLoadedRoute,
+  route: dataLoadedRoute,
   otherwise: PageLoader,
 });
 
-const AuthorizedRoute = {
-  view: SubjectsLoadedRouteView,
+const AuthorizedRoute = createRouteView<unknown, { id: string }, any>({
+  view: DataLoadedRouteView,
   route: authorizedRoute,
-};
+  otherwise: PageLoader,
+});
 
 export const HomeRoute = {
-  view: createRoutesView({
-    routes: [AuthorizedRoute],
-  }),
+  view: AuthorizedRoute,
   route: currentRoute,
   layout: CabinetLayout,
   otherwise: PageLoader,

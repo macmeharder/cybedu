@@ -14,7 +14,9 @@ export function CabinetLayout({ children }: { children: ReactNode }) {
         <meta name="theme-color" content="#7879f1" />
       </Helmet>
       <HeadNavigation color={HEAD_NAVIGATION_COLOR.PURPLE} />
-      <div className="flex h-full flex-col px-4">{children}</div>
+      <div className="flex h-full flex-1 flex-col overflow-y-scroll p-4">
+        {children}
+      </div>
       <BottomNavigation />
     </>
   );

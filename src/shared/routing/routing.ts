@@ -17,7 +17,7 @@ export const routes = {
 
   home: createRoute(),
   topic: createRoute<{ id: string }>(),
-  lesson: createRoute<{ id: string }>(),
+  learning_content: createRoute<{ id: string }>(),
   test: createRoute<{ id: string }>(),
 
   profile: createRoute(),
@@ -39,7 +39,7 @@ export const router = createHistoryRouter({
 
     { path: "/", route: routes.home },
     { path: "/topic/:id", route: routes.topic },
-    { path: "/topic/:id/lesson", route: routes.lesson },
+    { path: "/topic/:id/learning-content", route: routes.learning_content },
     { path: "/topic/:id/answer", route: routes.test },
 
     { path: "/profile", route: routes.profile },

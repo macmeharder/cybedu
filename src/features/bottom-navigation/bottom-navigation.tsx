@@ -10,7 +10,7 @@ const navigationItems = [
 ];
 export function BottomNavigation() {
   return (
-    <nav className="flex items-center justify-between bg-ce-gray pb-safe">
+    <nav className="flex shrink-0 items-center justify-between bg-ce-gray pb-safe">
       {navigationItems.map(function (item, index) {
         return (
           <Link

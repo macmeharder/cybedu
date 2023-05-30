@@ -7,14 +7,14 @@ import {
   headNavigationRightChanged,
 } from "~/features/head-navigation/model.tsx";
 
-import { getSubjectsQuery } from "~/entities/subject/api.ts";
+import { getLearningContentQuery } from "~/entities/learning-content/api.ts";
 
 import { routes } from "~/shared/routing/routing.ts";
 import { chainAuthorized } from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
-export const currentRoute = routes.home;
+export const currentRoute = routes.learning_content;
 
 sample({
   clock: currentRoute.opened,
@@ -33,16 +33,16 @@ const loadData = createEvent<RouteParamsAndQuery<{ id: string }>>();
 
 sample({
   clock: loadData,
-  source: getSubjectsQuery.$pending,
+  source: getLearningContentQuery.$pending,
   filter: (pending) => !pending,
   fn: function (_, { params }) {
     return params;
   },
-  target: getSubjectsQuery.start,
+  target: getLearningContentQuery.start,
 });
 
 export const dataLoadedRoute = chainRoute({
   route: authorizedRoute,
   beforeOpen: loadData,
-  openOn: getSubjectsQuery.finished.success,
+  openOn: getLearningContentQuery.finished.success,
 });

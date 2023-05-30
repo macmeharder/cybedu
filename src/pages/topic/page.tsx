@@ -6,8 +6,8 @@ import { Button } from "~/shared/ui/button.tsx";
 export function TopicPage() {
   const { id } = useUnit(routes.topic.$params);
   return (
-    <div className="mt-4 flex items-center gap-5">
-      <Button to={routes.lesson} params={{ id }}>
+    <div className="flex items-center gap-5">
+      <Button to={routes.learning_content} params={{ id }}>
         Лекция
       </Button>
       <Button
