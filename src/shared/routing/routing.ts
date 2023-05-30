@@ -16,9 +16,9 @@ export const routes = {
   forgot_password: createRoute(),
 
   home: createRoute(),
-  subject: createRoute<{ id: string }>(),
-  subject_lesson: createRoute<{ id: string }>(),
-  subject_test: createRoute<{ id: string }>(),
+  topic: createRoute<{ id: string }>(),
+  lesson: createRoute<{ id: string }>(),
+  test: createRoute<{ id: string }>(),
 
   profile: createRoute(),
   profile_settings: createRoute(),
@@ -38,9 +38,9 @@ export const router = createHistoryRouter({
     { path: "/forgot-password", route: routes.forgot_password },
 
     { path: "/", route: routes.home },
-    { path: "/subject/:id", route: routes.subject },
-    { path: "/section/:id/lesson", route: routes.subject_lesson },
-    { path: "/section/:id/answer", route: routes.subject_test },
+    { path: "/topic/:id", route: routes.topic },
+    { path: "/topic/:id/lesson", route: routes.lesson },
+    { path: "/topic/:id/answer", route: routes.test },
 
     { path: "/profile", route: routes.profile },
     { path: "/profile/settings", route: routes.profile_settings },

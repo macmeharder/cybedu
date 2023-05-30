@@ -20,7 +20,10 @@ export function SubjectItem({
     <Link
       to={to}
       params={{ id }}
-      className="relative flex h-28 w-28 select-none flex-col"
+      className={clsx(
+        "relative flex h-28 select-none flex-col items-center",
+        id === 1 ? "w-full" : "w-28"
+      )}
     >
       <SubjectBorder
         className={clsx(lesson ? "text-ce-yellow" : "text-ce-gray-2")}

@@ -1,37 +1,19 @@
 import { createStore, sample } from "effector";
 
-import { getSubjectQuery, getSubjectsQuery } from "./api";
+import { getTopicQuery } from "~/entities/topic/api.ts";
 
-export interface ISubject {
+export interface ITopic {
   id: number;
   name: string;
   short_description: string;
+  subject_id: number;
 }
-export const $subjects = createStore<ISubject[]>([]);
+export const $topic = createStore<ITopic | null>(null);
 
 sample({
-  clock: getSubjectsQuery.finished.success,
+  clock: getTopicQuery.finished.success,
   fn: function ({ result }) {
-    return result.subjects;
+    return result.topics[0];
   },
-  target: $subjects,
-});
-
-export interface ISubject {
-  id: number;
-  name: string;
-  short_description: string;
-}
-export const $subject = createStore<ISubject>({
-  id: 0,
-  name: "",
-  short_description: "",
-});
-
-sample({
-  clock: getSubjectQuery.finished.success,
-  fn: function ({ result }) {
-    return result;
-  },
-  target: $subject,
+  target: $topic,
 });

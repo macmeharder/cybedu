@@ -3,16 +3,16 @@ import { useUnit } from "effector-react";
 import { routes } from "~/shared/routing";
 import { Button } from "~/shared/ui/button.tsx";
 
-export function SubjectPage() {
-  const { id } = useUnit(routes.subject.$params);
+export function TopicPage() {
+  const { id } = useUnit(routes.topic.$params);
   return (
     <div className="mt-4 flex items-center gap-5">
-      <Button to={routes.subject_lesson} params={{ id }}>
+      <Button to={routes.lesson} params={{ id }}>
         Лекция
       </Button>
       <Button
         color="white"
-        to={routes.subject_test}
+        to={routes.test}
         params={{ id }}
         query={{ testId: 1, questionId: 1 }}
       >
