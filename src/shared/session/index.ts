@@ -15,6 +15,9 @@ import {
 
 export interface ISession {
   token: string;
+  user: {
+    user_id: string;
+  };
 }
 
 enum AuthStatus {
@@ -26,6 +29,10 @@ enum AuthStatus {
 
 export const setTokenFx = createEffect(function (token: string) {
   localStorage.setItem("token", token);
+});
+
+export const setUserIdFx = createEffect(function (userId: string) {
+  localStorage.setItem("userId", userId);
 });
 
 export const sessionCheckFx = createEffect(function () {

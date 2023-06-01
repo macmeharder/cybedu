@@ -8,7 +8,12 @@ import {
 
 import { ILoginMutationParams, loginMutation } from "~/shared/api/login.ts";
 import { routes } from "~/shared/routing/routing.ts";
-import { chainAnonymous, setTokenFx } from "~/shared/session";
+import {
+  chainAnonymous,
+  ISession,
+  setTokenFx,
+  setUserIdFx,
+} from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
@@ -31,8 +36,10 @@ export const submitLoginFormFx = createEffect<ILoginMutationParams, void>(
 
 sample({
   clock: loginMutation.finished.success,
-  fn: function ({ result }) {
-    return result.token;
-  },
-  target: setTokenFx,
+  target: [
+    setTokenFx.prepend((payload: { result: ISession }) => payload.result.token),
+    setUserIdFx.prepend(
+      (payload: { result: ISession }) => payload.result.user.user_id
+    ),
+  ],
 });

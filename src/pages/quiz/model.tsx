@@ -1,0 +1,98 @@
+import { chainRoute, RouteParamsAndQuery } from "atomic-router";
+import { createEvent, createStore, sample } from "effector";
+
+import {
+  headNavigationCenterChanged,
+  headNavigationLeftChanged,
+  headNavigationRightChanged,
+} from "~/features/head-navigation/model.tsx";
+
+import { getOptionsQuery } from "~/entities/option/api.ts";
+import { getQuestionsQuery } from "~/entities/question/api.ts";
+import { $questions, IQuestion } from "~/entities/question/model.ts";
+import { getQuizQuery } from "~/entities/quiz/api.ts";
+import { $quiz } from "~/entities/quiz/model.ts";
+
+import { routes } from "~/shared/routing/routing.ts";
+import { chainAuthorized } from "~/shared/session";
+
+import { Center, Left, Right } from "./views.tsx";
+
+export const currentRoute = routes.quiz;
+
+sample({
+  clock: currentRoute.opened,
+  source: $quiz,
+  target: [
+    headNavigationLeftChanged.prepend(() => <Left />),
+    headNavigationCenterChanged.prepend(() => <Center />),
+    headNavigationRightChanged.prepend(() => <Right />),
+  ],
+});
+
+export const authorizedRoute = chainAuthorized(currentRoute, {
+  otherwise: routes.login.open,
+});
+
+const loadData = createEvent<RouteParamsAndQuery<{ id: string }>>();
+
+sample({
+  clock: loadData,
+  source: getQuizQuery.$pending,
+  filter: (pending) => !pending,
+  fn: function (_, { params }) {
+    return params;
+  },
+  target: getQuizQuery.start,
+});
+
+sample({
+  clock: getQuizQuery.finished.success,
+  source: getQuestionsQuery.$pending,
+  filter: (pending) => !pending,
+  fn: function (_, { result }) {
+    return { id: result.quizs[0].id };
+  },
+  target: getQuestionsQuery.start,
+});
+
+export const activeQuestionIdSet = createEvent<{ id: number }>();
+export const $activeQuestionId = createStore<{ id: number } | null>(null);
+$activeQuestionId.on(activeQuestionIdSet, (_, payload) => payload);
+
+export const $activeQuestion = createStore<IQuestion | null>(null);
+
+sample({
+  clock: getQuestionsQuery.finished.success,
+  source: getOptionsQuery.$pending,
+  filter: (pending) => !pending,
+  fn: function (_, { result }) {
+    return { id: result.questions[0].id };
+  },
+  target: activeQuestionIdSet,
+});
+
+sample({
+  clock: activeQuestionIdSet,
+  source: getQuestionsQuery.$pending,
+  filter: (pending) => !pending,
+  fn: function (_, payload) {
+    return payload;
+  },
+  target: getOptionsQuery.start,
+});
+
+sample({
+  clock: activeQuestionIdSet,
+  source: $questions,
+  fn: function (questions, { id }) {
+    return questions.find((question) => question.id === id) || null;
+  },
+  target: $activeQuestion,
+});
+
+export const dataLoadedRoute = chainRoute({
+  route: authorizedRoute,
+  beforeOpen: loadData,
+  openOn: getOptionsQuery.finished.success,
+});

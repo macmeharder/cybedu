@@ -10,12 +10,7 @@ export function TopicPage() {
       <Button to={routes.learning_content} params={{ id }}>
         Лекция
       </Button>
-      <Button
-        color="white"
-        to={routes.test}
-        params={{ id }}
-        query={{ testId: 1, questionId: 1 }}
-      >
+      <Button color="white" to={routes.quiz} params={{ id }}>
         Тест
       </Button>
     </div>
