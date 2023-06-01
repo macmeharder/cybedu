@@ -44,12 +44,3 @@ sample({
   clock: registerMutation.finished.success,
   target: routes.register_3.open,
 });
-
-// sample({
-//   clock: routes.register_3.opened,
-//   source: $registerForm,
-//   filter: function (source) {
-//     return source === null;
-//   },
-//   target: routes.register_1.open,
-// });

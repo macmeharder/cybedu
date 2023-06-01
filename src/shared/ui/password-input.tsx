@@ -34,6 +34,7 @@ export function PasswordInput({ label, className, register, ...props }: Props) {
             type="checkbox"
             className="peer sr-only"
             onChange={changeType}
+            tabIndex={-1}
           />
           <img
             src={getImageUrl("./eye.svg")}

@@ -6,6 +6,18 @@ export enum HEAD_NAVIGATION_COLOR {
   WHITE = "white",
 }
 
+export const headNavigationColorChanged = createEvent<HEAD_NAVIGATION_COLOR>();
+export const $headNavigationColor = restore(
+  headNavigationColorChanged,
+  HEAD_NAVIGATION_COLOR.WHITE
+);
+
+export const headNavigationVisibilityChanged = createEvent<boolean>();
+export const $headNavigationVisibility = restore(
+  headNavigationVisibilityChanged,
+  true
+);
+
 export const headNavigationLeftChanged = createEvent<ReactNode>();
 export const $headNavigationLeft = restore(headNavigationLeftChanged, null);
 

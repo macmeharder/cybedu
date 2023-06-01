@@ -1,4 +1,5 @@
 import { createMutation } from "@farfetched/core";
+import { sample } from "effector";
 
 import { ISession } from "~/shared/session";
 
@@ -25,6 +26,13 @@ export const registerMutation = createMutation<IRegistrationParams, ISession>({
   },
 });
 
+sample({
+  clock: registerMutation.finished.failure,
+  fn: function () {
+    alert("User with given email already exists");
+  },
+});
+
 export interface IVerifyEmailParams {
   email: string;
   verification_code: string;
@@ -37,5 +45,12 @@ export const verifyEmailMutation = createMutation<IVerifyEmailParams, null>({
       endpoint: "/auth/verify",
       body,
     });
+  },
+});
+
+sample({
+  clock: verifyEmailMutation.finished.failure,
+  fn: function () {
+    alert("Verification code is not correct!");
   },
 });

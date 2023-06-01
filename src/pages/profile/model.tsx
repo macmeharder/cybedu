@@ -1,6 +1,11 @@
 import { sample } from "effector";
 
 import {
+  BOTTOM_NAV_ITEM,
+  bottomNavigationActiveItemChanged,
+  bottomNavigationVisibilityChanged,
+} from "~/features/bottom-navigation/model.ts";
+import {
   HEAD_NAVIGATION_COLOR,
   headNavigationCenterChanged,
   headNavigationColorChanged,
@@ -10,13 +15,11 @@ import {
 } from "~/features/head-navigation/model.tsx";
 
 import { routes } from "~/shared/routing/routing.ts";
-import { chainAnonymous } from "~/shared/session";
+import { chainAuthorized } from "~/shared/session";
 
 import { Center, Left, Right } from "./views.tsx";
 
-export const currentRoute = routes.register_2;
-
-chainAnonymous(currentRoute, { otherwise: routes.home.open });
+export const currentRoute = routes.profile;
 
 sample({
   clock: currentRoute.opened,
@@ -25,6 +28,13 @@ sample({
     headNavigationCenterChanged.prepend(() => <Center />),
     headNavigationRightChanged.prepend(() => <Right />),
     headNavigationColorChanged.prepend(() => HEAD_NAVIGATION_COLOR.WHITE),
-    headNavigationVisibilityChanged.prepend(() => true),
+    headNavigationVisibilityChanged.prepend(() => false),
+
+    bottomNavigationActiveItemChanged.prepend(() => BOTTOM_NAV_ITEM.PROFILE),
+    bottomNavigationVisibilityChanged.prepend(() => true),
   ],
+});
+
+export const authorizedRoute = chainAuthorized(currentRoute, {
+  otherwise: routes.home.open,
 });

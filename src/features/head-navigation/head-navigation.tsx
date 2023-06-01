@@ -3,18 +3,26 @@ import { useUnit } from "effector-react/effector-react.umd";
 
 import {
   $headNavigationCenter,
+  $headNavigationColor,
   $headNavigationLeft,
   $headNavigationRight,
+  $headNavigationVisibility,
   HEAD_NAVIGATION_COLOR,
 } from "./model.tsx";
 
-export function HeadNavigation({ color }: { color: HEAD_NAVIGATION_COLOR }) {
+export function HeadNavigation() {
+  const { visibility, color } = useUnit({
+    visibility: $headNavigationVisibility,
+    color: $headNavigationColor,
+  });
+
   return (
     <nav
       className={clsx(
         "flex h-[72px] w-full shrink-0 items-center justify-between px-4 pt-safe",
         { "bg-ce-purple text-white": color === HEAD_NAVIGATION_COLOR.PURPLE },
-        { "text-gray-3 bg-white": color === HEAD_NAVIGATION_COLOR.WHITE }
+        { "text-gray-3 bg-white": color === HEAD_NAVIGATION_COLOR.WHITE },
+        { hidden: !visibility }
       )}
     >
       <Left />

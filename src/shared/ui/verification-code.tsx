@@ -103,10 +103,9 @@ export function VerificationCode({
           <input
             className="h-10 w-10 rounded-xl border-none bg-ce-gray text-center"
             key={index}
-            type="tel"
+            type="text"
             placeholder="-"
             maxLength={1}
-            pattern="[0-9]"
             onKeyDown={handleKeyDown}
           />
         );

@@ -10,13 +10,13 @@ export async function request({ endpoint, body, method }: Request) {
 
   const init: any = {
     headers: {
-      "X-Csrf-Token": token,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
   };
 
-  if (!token) delete init.headers["X-Csrf-Token"];
+  if (!token) delete init.headers["Authorization"];
   if (!body) delete init.body;
 
   const response = await fetch(`${API}/api/v1${endpoint}`, {

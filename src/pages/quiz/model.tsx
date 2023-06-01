@@ -2,13 +2,25 @@ import { chainRoute, RouteParamsAndQuery } from "atomic-router";
 import { createEvent, createStore, sample } from "effector";
 
 import {
+  BOTTOM_NAV_ITEM,
+  bottomNavigationActiveItemChanged,
+  bottomNavigationVisibilityChanged,
+} from "~/features/bottom-navigation/model.ts";
+import {
+  HEAD_NAVIGATION_COLOR,
   headNavigationCenterChanged,
+  headNavigationColorChanged,
   headNavigationLeftChanged,
   headNavigationRightChanged,
+  headNavigationVisibilityChanged,
 } from "~/features/head-navigation/model.tsx";
 
 import { getOptionsQuery } from "~/entities/option/api.ts";
-import { getQuestionsQuery } from "~/entities/question/api.ts";
+import {
+  getQuestionsQuery,
+  IQuestionsProgressParams,
+  setQuestionsProgressMutation,
+} from "~/entities/question/api.ts";
 import { $questions, IQuestion } from "~/entities/question/model.ts";
 import { getQuizQuery } from "~/entities/quiz/api.ts";
 import { $quiz } from "~/entities/quiz/model.ts";
@@ -27,6 +39,11 @@ sample({
     headNavigationLeftChanged.prepend(() => <Left />),
     headNavigationCenterChanged.prepend(() => <Center />),
     headNavigationRightChanged.prepend(() => <Right />),
+    headNavigationColorChanged.prepend(() => HEAD_NAVIGATION_COLOR.PURPLE),
+    headNavigationVisibilityChanged.prepend(() => true),
+
+    bottomNavigationActiveItemChanged.prepend(() => BOTTOM_NAV_ITEM.HOME),
+    bottomNavigationVisibilityChanged.prepend(() => true),
   ],
 });
 
@@ -95,4 +112,11 @@ export const dataLoadedRoute = chainRoute({
   route: authorizedRoute,
   beforeOpen: loadData,
   openOn: getOptionsQuery.finished.success,
+});
+
+export const questionSubmit = createEvent<IQuestionsProgressParams>();
+
+sample({
+  clock: questionSubmit,
+  target: setQuestionsProgressMutation.start,
 });

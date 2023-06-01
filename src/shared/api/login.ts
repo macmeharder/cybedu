@@ -1,4 +1,5 @@
 import { createMutation } from "@farfetched/core";
+import { sample } from "effector";
 
 import { ISession } from "~/shared/session";
 
@@ -16,5 +17,12 @@ export const loginMutation = createMutation<ILoginMutationParams, ISession>({
       endpoint: "/auth/login",
       body,
     });
+  },
+});
+
+sample({
+  clock: loginMutation.finished.failure,
+  fn: function () {
+    alert("Invalid email or password");
   },
 });

@@ -1,9 +1,12 @@
 import { createEvent, sample } from "effector";
 
 import {
+  HEAD_NAVIGATION_COLOR,
   headNavigationCenterChanged,
+  headNavigationColorChanged,
   headNavigationLeftChanged,
   headNavigationRightChanged,
+  headNavigationVisibilityChanged,
 } from "~/features/head-navigation/model.tsx";
 
 import { routes } from "~/shared/routing";
@@ -21,6 +24,8 @@ sample({
     headNavigationLeftChanged.prepend(() => <Left />),
     headNavigationCenterChanged.prepend(() => <Center />),
     headNavigationRightChanged.prepend(() => <Right />),
+    headNavigationColorChanged.prepend(() => HEAD_NAVIGATION_COLOR.WHITE),
+    headNavigationVisibilityChanged.prepend(() => true),
   ],
 });
 
