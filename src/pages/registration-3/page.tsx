@@ -38,7 +38,7 @@ function Form() {
         </p>
       </div>
       <VerificationCode
-        length={4}
+        length={6}
         onSubmit={thirdRegistrationFormSubmittedFn}
       />
       <Bottom />

@@ -1,7 +1,7 @@
 import { createEvent, createStore, sample } from "effector";
 
-import { registerMutation } from "~/shared/api/register.ts";
-import { setTokenFx } from "~/shared/session";
+import { verifyEmailMutation } from "~/shared/api/register.ts";
+import { routes } from "~/shared/routing";
 
 export interface IFirstRegistrationForm {
   first_name: string;
@@ -18,9 +18,7 @@ export interface ISecondRegistrationForm {
 export const secondRegistrationFormSubmitted =
   createEvent<ISecondRegistrationForm>();
 
-export interface IThirdRegistrationForm {
-  code: string;
-}
+export type IThirdRegistrationForm = string;
 
 export const thirdRegistrationFormSubmitted =
   createEvent<IThirdRegistrationForm>();
@@ -48,14 +46,16 @@ sample({
   clock: thirdRegistrationFormSubmitted,
   source: $registerForm,
   filter: (source) => source !== null,
-  fn: (source) => source!,
-  target: registerMutation.start,
+  fn: (source, payload) => {
+    return {
+      email: source!.email!,
+      verification_code: payload,
+    };
+  },
+  target: verifyEmailMutation.start,
 });
 
 sample({
-  clock: registerMutation.finished.success,
-  fn: function ({ result }) {
-    return result.token;
-  },
-  target: setTokenFx,
+  clock: verifyEmailMutation.finished.success,
+  target: routes.login.open,
 });

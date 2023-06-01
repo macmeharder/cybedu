@@ -24,3 +24,18 @@ export const registerMutation = createMutation<IRegistrationParams, ISession>({
     });
   },
 });
+
+export interface IVerifyEmailParams {
+  email: string;
+  verification_code: string;
+}
+
+export const verifyEmailMutation = createMutation<IVerifyEmailParams, null>({
+  handler: async function (body) {
+    return request({
+      method: "POST",
+      endpoint: "/auth/verify",
+      body,
+    });
+  },
+});

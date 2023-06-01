@@ -15,16 +15,24 @@ function handleInput(e: any) {
   }
 }
 
-function handlePaste(e: any) {
+function handlePaste(e: any, onSubmit: any) {
   e.preventDefault();
   const paste = e.clipboardData.getData("text");
-  const inputs = e.currentTarget.querySelectorAll("input");
+  const inputs: any = Array.from(e.currentTarget.elements);
 
   inputs.forEach((input: any, i: number) => {
     input.value = paste[i] || "";
   });
 
-  inputs[inputs.length - 1].focus();
+  if (paste.length < inputs.length) {
+    inputs[paste.length].focus();
+  } else {
+    inputs[inputs.length - 1].focus();
+    const code = inputs.reduce(function (accumulator: string, input: any) {
+      return accumulator + input.value;
+    }, "");
+    onSubmit(code);
+  }
 }
 
 function handleBackspace(e: any) {
@@ -86,14 +94,14 @@ export function VerificationCode({
   return (
     <form
       onInput={handleInput}
-      onPaste={handlePaste}
+      onPaste={(e) => handlePaste(e, onSubmit)}
       onChange={handleChange}
-      className="flex items-center gap-9"
+      className="flex items-center gap-4"
     >
       {new Array(length).fill(null).map(function (_, index) {
         return (
           <input
-            className="h-14 w-14 rounded-xl border-none bg-ce-gray text-center"
+            className="h-10 w-10 rounded-xl border-none bg-ce-gray text-center"
             key={index}
             type="tel"
             placeholder="-"
