@@ -21,6 +21,9 @@ module.exports = {
           red: {
             DEFAULT: "var(--ce-red)",
           },
+          green: {
+            DEFAULT: "var(--ce-green)",
+          },
         },
       },
       animation: {

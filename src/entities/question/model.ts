@@ -1,10 +1,6 @@
 import { createStore, sample } from "effector";
 
-import {
-  getQuestionsQuery,
-  IQuestionsProgressParams,
-  setQuestionsProgressMutation,
-} from "./api.ts";
+import { getQuestionsQuery, setQuestionsProgressMutation } from "./api.ts";
 
 export interface IQuestion {
   id: number;
@@ -31,9 +27,7 @@ export interface IQuestionProgress {
   is_correct: boolean;
 }
 
-export const $questionsProgress = createStore<IQuestionsProgressParams | null>(
-  null
-);
+export const $questionsProgress = createStore<IQuestionProgress | null>(null);
 
 sample({
   clock: setQuestionsProgressMutation.finished.success,

@@ -73,9 +73,42 @@ sample({
   target: getQuestionsQuery.start,
 });
 
+export const activeQuestionNext = createEvent();
 export const activeQuestionIdSet = createEvent<{ id: number }>();
 export const $activeQuestionId = createStore<{ id: number } | null>(null);
 $activeQuestionId.on(activeQuestionIdSet, (_, payload) => payload);
+
+export const $activeQuestionNextId = createStore<
+  { id: number } | null | "finish"
+>(null);
+
+sample({
+  clock: $activeQuestionId,
+  source: $questions,
+  filter: function (_, payload) {
+    return payload !== null;
+  },
+  fn: function (source, payload) {
+    if (source.find((item) => item.id === payload!.id + 1)) {
+      return { id: payload!.id + 1 };
+    }
+    return "finish";
+  },
+  target: $activeQuestionNextId,
+});
+
+sample({
+  clock: activeQuestionNext,
+  source: $activeQuestionNextId,
+  filter: function (source) {
+    console.log(typeof source, source);
+    return source !== null && typeof source === "object";
+  },
+  fn: function (source) {
+    return source as { id: number };
+  },
+  target: activeQuestionIdSet,
+});
 
 export const $activeQuestion = createStore<IQuestion | null>(null);
 
