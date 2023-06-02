@@ -19,6 +19,7 @@ export const routes = {
   topic: createRoute<{ id: string }>(),
   learning_content: createRoute<{ id: string }>(),
   quiz: createRoute<{ id: string }>(),
+  quiz_progress: createRoute<{ id: string }>(),
 
   profile: createRoute(),
   profile_settings: createRoute(),
@@ -41,6 +42,7 @@ export const router = createHistoryRouter({
     { path: "/topic/:id", route: routes.topic },
     { path: "/topic/:id/learning-content", route: routes.learning_content },
     { path: "/topic/:id/quiz", route: routes.quiz },
+    { path: "/quiz/result/:id", route: routes.quiz_progress },
 
     { path: "/profile", route: routes.profile },
     { path: "/profile/settings", route: routes.profile_settings },

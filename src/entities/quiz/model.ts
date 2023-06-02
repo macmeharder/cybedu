@@ -1,6 +1,6 @@
 import { createStore, sample } from "effector";
 
-import { getQuizQuery } from "./api.ts";
+import { getQuizProgressQuery, getQuizQuery } from "./api.ts";
 
 export interface IQuiz {
   id: number;
@@ -15,4 +15,20 @@ sample({
     return result.quizs[0];
   },
   target: $quiz,
+});
+
+export interface IQuizProgress {
+  QuizID: number;
+  Grade: number;
+  QuestionsAnswered: number;
+  QuestionsCorrect: number;
+}
+export const $quizsProgress = createStore<IQuizProgress[]>([]);
+
+sample({
+  clock: getQuizProgressQuery.finished.success,
+  fn: function ({ result }) {
+    return result.quizs;
+  },
+  target: $quizsProgress,
 });

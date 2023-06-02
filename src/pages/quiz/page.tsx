@@ -14,6 +14,7 @@ import { $options } from "~/entities/option/model.ts";
 import { setQuestionsProgressMutation } from "~/entities/question/api.ts";
 import { $questionsProgress } from "~/entities/question/model.ts";
 
+import { routes } from "~/shared/routing";
 import { Button } from "~/shared/ui/button.tsx";
 import { PageLoader } from "~/shared/ui/page-loader.tsx";
 
@@ -115,7 +116,13 @@ export function QuizPage() {
           </Button>
         )}
         {isSubmitted && activeQuestionNextId === "finish" && (
-          <Button className="mt-auto">Закончить</Button>
+          <Button
+            className="mt-auto"
+            to={routes.quiz_progress}
+            params={{ id: activeQuestion.quiz_id }}
+          >
+            Закончить
+          </Button>
         )}
       </form>
     </div>

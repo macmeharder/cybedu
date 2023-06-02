@@ -6,6 +6,7 @@ import { LearningContentRoute } from "~/pages/learning-content";
 import { LoginRoute } from "~/pages/login";
 import { ProfileRoute } from "~/pages/profile";
 import { QuizRoute } from "~/pages/quiz";
+import { QuizResultRoute } from "~/pages/quiz-result";
 import { FirstRegistrationRoute } from "~/pages/registration-1";
 import { SecondRegistrationRoute } from "~/pages/registration-2";
 import { ThirdRegistrationRoute } from "~/pages/registration-3";
@@ -23,5 +24,6 @@ export const RoutesView = createRoutesView({
     LearningContentRoute,
     QuizRoute,
     ProfileRoute,
+    QuizResultRoute,
   ],
 });

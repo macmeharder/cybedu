@@ -153,3 +153,9 @@ sample({
   clock: questionSubmit,
   target: setQuestionsProgressMutation.start,
 });
+
+export const quizSubmit = createEvent()
+
+sample({
+  clock: quizSubmit
+})
