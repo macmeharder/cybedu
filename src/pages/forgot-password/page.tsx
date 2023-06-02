@@ -1,9 +1,12 @@
 import { useUnit } from "effector-react";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { forgotFormSubmitted } from "~/pages/forgot-password/model.tsx";
+import {
+  $forgotPasswordEmail,
+  forgotFormSubmitted,
+} from "~/pages/forgot-password/model.tsx";
 
+import { forgotSchema } from "~/shared/schemas/shemas.ts";
 import { Button } from "~/shared/ui/button";
 import { Input } from "~/shared/ui/input";
 
@@ -15,26 +18,34 @@ export function ForgotPasswordPage() {
   );
 }
 export function Form() {
-  //   todo remove
-  const [state, setState] = useState(false);
-  const { forgotFormSubmittedFn } = useUnit({
+  const { forgotFormSubmittedFn, email } = useUnit({
     forgotFormSubmittedFn: forgotFormSubmitted,
+    email: $forgotPasswordEmail,
   });
-  const { register, handleSubmit } = useForm();
+
+  const {
+    register,
+    formState: { isValid },
+    handleSubmit,
+  } = useForm<{ email: string }>();
+
   return (
     <div className="flex w-full max-w-md flex-1 flex-col items-center gap-10">
       <form
         className="flex w-full flex-col gap-4"
         onSubmit={handleSubmit(forgotFormSubmittedFn)}
       >
-        <Input label="E-mail" type="email" register={register("email")} />
-        <Button onClick={() => setState(true)}>Восстановить пароль</Button>
+        <Input
+          label="E-mail"
+          type="email"
+          register={register("email", forgotSchema.email)}
+        />
+        <Button disabled={!isValid}>Восстановить пароль</Button>
       </form>
-      {state && (
+      {email !== null && (
         <p className="rounded-2xl bg-green-100 p-4 text-sm text-green-600">
-          На почту <span className="text-ce-purple">name@mail.com</span> была
-          выслана инструкция по изменению пароля. Пожалуйста, проверьте свою
-          почту.
+          На почту <span className="text-ce-purple">{email}</span> была выслана
+          инструкция по изменению пароля. Пожалуйста, проверьте свою почту.
         </p>
       )}
     </div>

@@ -22,3 +22,7 @@ export const registerSchema = {
   password: passwordField,
   confirmPassword: confirmPasswordField,
 };
+export const resetSchema = {
+  password: passwordField,
+  confirmPassword: confirmPasswordField,
+};

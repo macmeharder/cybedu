@@ -19,7 +19,7 @@ export function Button({
 }: Props) {
   const classList = clsx(
     "w-full border-2  text-center",
-    "disabled:bg-ce-gray disabled:text-ce-blue-gray disabled:border-ce-gray",
+    "disabled:bg-ce-blue-gray disabled:text-white disabled:border-ce-blue-gray",
     "text-lg rounded-lg py-3.5 px-6",
     {
       "bg-ce-purple text-white border-ce-purple": color === "primary",

@@ -7,9 +7,10 @@ import {
   $bottomNavigationVisibility,
 } from "~/features/bottom-navigation/model.ts";
 
-import { ReactComponent as Home } from "~/shared/images/home.svg";
-import { ReactComponent as Profile } from "~/shared/images/profile.svg";
 import { routes } from "~/shared/routing";
+
+import { ReactComponent as Home } from "/public/images/home.svg";
+import { ReactComponent as Profile } from "/public/images/profile.svg";
 
 const navigationItems = [
   { to: routes.home, icon: <Home /> },

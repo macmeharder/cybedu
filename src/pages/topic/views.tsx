@@ -2,7 +2,6 @@ import { useUnit } from "effector-react";
 
 import { $topic } from "~/entities/topic/model.ts";
 
-import { getImageUrl } from "~/shared/images";
 import { BackButton } from "~/shared/ui/back-button.tsx";
 
 export function Left() {
@@ -18,7 +17,7 @@ export function Right() {
 
   return (
     <div className="flex flex-1 justify-end">
-      <img alt="" src={getImageUrl(`./subjects/${topic?.id}.png`)} />
+      <img alt="" src={`/images/subjects/${topic?.id}.png`} />
     </div>
   );
 }

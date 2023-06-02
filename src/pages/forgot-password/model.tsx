@@ -1,4 +1,4 @@
-import { createEvent, sample } from "effector";
+import { createEvent, createStore, sample } from "effector";
 
 import {
   HEAD_NAVIGATION_COLOR,
@@ -9,6 +9,7 @@ import {
   headNavigationVisibilityChanged,
 } from "~/features/head-navigation/model.tsx";
 
+import { forgotPasswordQuery } from "~/shared/api/forgot-password.ts";
 import { routes } from "~/shared/routing";
 import { chainAnonymous } from "~/shared/session";
 
@@ -29,4 +30,19 @@ sample({
   ],
 });
 
-export const forgotFormSubmitted = createEvent();
+export const forgotFormSubmitted = createEvent<{ email: string }>();
+
+sample({
+  clock: forgotFormSubmitted,
+  target: forgotPasswordQuery.start,
+});
+
+export const $forgotPasswordEmail = createStore<string | null>(null);
+
+sample({
+  clock: forgotPasswordQuery.finished.success,
+  fn: function ({ params }) {
+    return params.email;
+  },
+  target: $forgotPasswordEmail,
+});

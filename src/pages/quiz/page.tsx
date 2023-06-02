@@ -119,9 +119,9 @@ export function QuizPage() {
           <Button
             className="mt-auto"
             to={routes.quiz_progress}
-            params={{ id: activeQuestion.quiz_id }}
+            params={{ id: activeQuestion.quiz_id.toString() }}
           >
-            Закончить
+            Результат
           </Button>
         )}
       </form>

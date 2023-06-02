@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import { InputHTMLAttributes, useState } from "react";
 
-import { getImageUrl } from "~/shared/images";
-
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   register: any;
@@ -37,12 +35,12 @@ export function PasswordInput({ label, className, register, ...props }: Props) {
             tabIndex={-1}
           />
           <img
-            src={getImageUrl("./eye.svg")}
+            src="/images/eye.svg"
             className="peer-checked:hidden"
             alt="show password"
           />
           <img
-            src={getImageUrl("./eye-off.svg")}
+            src="/images/eye-off.svg"
             className="hidden peer-checked:block"
             alt="hide password"
           />

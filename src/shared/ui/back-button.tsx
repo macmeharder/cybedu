@@ -1,7 +1,8 @@
 import clsx from "clsx";
 
-import { ReactComponent as ArrowLeft } from "~/shared/images/arrow-left.svg";
 import { router } from "~/shared/routing";
+
+import { ReactComponent as ArrowLeft } from "/public/images/arrow-left.svg";
 
 export function BackButton({ className }: { className: string }) {
   return (

@@ -10,6 +10,7 @@ import { QuizResultRoute } from "~/pages/quiz-result";
 import { FirstRegistrationRoute } from "~/pages/registration-1";
 import { SecondRegistrationRoute } from "~/pages/registration-2";
 import { ThirdRegistrationRoute } from "~/pages/registration-3";
+import { ResetPasswordRoute } from "~/pages/reset-password";
 import { TopicRoute } from "~/pages/topic";
 
 export const RoutesView = createRoutesView({
@@ -25,5 +26,6 @@ export const RoutesView = createRoutesView({
     QuizRoute,
     ProfileRoute,
     QuizResultRoute,
+    ResetPasswordRoute,
   ],
 });

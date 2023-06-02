@@ -14,6 +14,7 @@ export const routes = {
   register_2: createRoute(),
   register_3: createRoute(),
   forgot_password: createRoute(),
+  reset_password: createRoute<{ code: string }>(),
 
   home: createRoute(),
   topic: createRoute<{ id: string }>(),
@@ -37,6 +38,7 @@ export const router = createHistoryRouter({
     { path: "/register-2", route: routes.register_2 },
     { path: "/register-3", route: routes.register_3 },
     { path: "/forgot-password", route: routes.forgot_password },
+    { path: "/reset_password", route: routes.reset_password },
 
     { path: "/", route: routes.home },
     { path: "/topic/:id", route: routes.topic },

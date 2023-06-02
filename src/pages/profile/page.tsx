@@ -1,6 +1,7 @@
 import { Link } from "atomic-router-react";
 
 import { routes } from "~/shared/routing";
+import { sessionCheckFx } from "~/shared/session";
 
 const sections = [
   {
@@ -27,9 +28,13 @@ const sections = [
   },
 ];
 
-export function ProfilePage() {
-  // const logout = useUnit(logoutEv);
+function handleLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userId");
+  sessionCheckFx();
+}
 
+export function ProfilePage() {
   return (
     <div className="flex h-full flex-col gap-10 pt-safe">
       {sections.map(function (section) {
@@ -58,7 +63,7 @@ export function ProfilePage() {
         );
       })}
       <button
-        // onClick={logout}
+        onClick={handleLogout}
         className="mb-10 mt-auto text-center text-lg text-ce-red"
       >
         Выйти

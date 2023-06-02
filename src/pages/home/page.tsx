@@ -5,34 +5,6 @@ import { $subjects } from "~/entities/subject/model.ts";
 import { routes } from "~/shared/routing";
 import { SubjectItem } from "~/shared/ui/subject-item.tsx";
 
-// const topic = [
-//   {
-//     id: "4",
-//     lesson: true,
-//     test: true,
-//   },
-//   {
-//     id: "5",
-//     lesson: true,
-//     test: false,
-//   },
-//   {
-//     id: "2",
-//     lesson: true,
-//     test: false,
-//   },
-//   {
-//     id: "3",
-//     lesson: true,
-//     test: false,
-//   },
-//   {
-//     id: "1",
-//     lesson: true,
-//     test: false,
-//   },
-// ];
-
 export function HomePage() {
   const { subjects } = useUnit({ subjects: $subjects });
   return (
