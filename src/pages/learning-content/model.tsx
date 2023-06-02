@@ -16,6 +16,7 @@ import {
 } from "~/features/head-navigation/model.tsx";
 
 import { getLearningContentQuery } from "~/entities/learning-content/api.ts";
+import { setTopicProgressMutation } from "~/entities/topic/api.ts";
 
 import { routes } from "~/shared/routing/routing.ts";
 import { chainAuthorized } from "~/shared/session";
@@ -58,4 +59,12 @@ export const dataLoadedRoute = chainRoute({
   route: authorizedRoute,
   beforeOpen: loadData,
   openOn: getLearningContentQuery.finished.success,
+});
+
+sample({
+  clock: setTopicProgressMutation.finished.success,
+  fn: function ({ params }) {
+    return { id: params.id.toString() };
+  },
+  target: routes.topic.open,
 });
