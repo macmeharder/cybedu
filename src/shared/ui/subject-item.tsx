@@ -5,8 +5,8 @@ import clsx from "clsx";
 import { ReactComponent as SubjectBorder } from "/public/images/subject-border.svg";
 
 export function SubjectItem({
-  lesson = true,
-  test = true,
+  lesson = false,
+  test = false,
   to,
   id,
 }: {

@@ -15,7 +15,10 @@ import {
   headNavigationVisibilityChanged,
 } from "~/features/head-navigation/model.tsx";
 
-import { getSubjectsQuery } from "~/entities/subject/api.ts";
+import {
+  getSubjectsProgressQuery,
+  getSubjectsQuery,
+} from "~/entities/subject/api.ts";
 
 import { routes } from "~/shared/routing/routing.ts";
 import { chainAuthorized } from "~/shared/session";
@@ -48,14 +51,17 @@ sample({
   clock: loadData,
   source: getSubjectsQuery.$pending,
   filter: (pending) => !pending,
-  fn: function (_, { params }) {
-    return params;
-  },
   target: getSubjectsQuery.start,
+});
+sample({
+  clock: getSubjectsQuery.finished.success,
+  source: getSubjectsProgressQuery.$pending,
+  filter: (pending) => !pending,
+  target: getSubjectsProgressQuery.start,
 });
 
 export const dataLoadedRoute = chainRoute({
   route: authorizedRoute,
   beforeOpen: loadData,
-  openOn: getSubjectsQuery.finished.success,
+  openOn: getSubjectsProgressQuery.finished.success,
 });
