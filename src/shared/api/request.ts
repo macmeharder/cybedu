@@ -1,6 +1,6 @@
 interface Request {
   endpoint: string;
-  method: "POST" | "GET";
+  method: "POST" | "GET" | "PUT" | "DELETE";
   body?: any;
 }
 export const API = "http://209.38.245.245:5000";

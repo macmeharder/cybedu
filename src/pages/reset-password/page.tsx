@@ -2,7 +2,6 @@ import { useUnit } from "effector-react";
 import { useForm } from "react-hook-form";
 
 import { routes } from "~/shared/routing";
-import { registerSchema } from "~/shared/schemas";
 import { resetSchema } from "~/shared/schemas/shemas.ts";
 import { Button } from "~/shared/ui/button.tsx";
 import { PasswordInput } from "~/shared/ui/password-input.tsx";
@@ -10,7 +9,7 @@ import { PasswordInput } from "~/shared/ui/password-input.tsx";
 import { resetFormSubmitted } from "./model.tsx";
 
 export function ResetPasswordPage() {
-  const { query, resetFormSubmittedFn } = useUnit({
+  const { resetFormSubmittedFn } = useUnit({
     query: routes.reset_password.$query,
     resetFormSubmittedFn: resetFormSubmitted,
   });
@@ -22,7 +21,6 @@ export function ResetPasswordPage() {
     watch,
   } = useForm<{ new_password: string; confirmPassword: string }>();
 
-  console.log(query);
   return (
     <div className="flex h-full flex-col gap-10 pt-safe">
       <form
@@ -33,7 +31,7 @@ export function ResetPasswordPage() {
         <PasswordInput
           label="Новый пароль"
           placeholder="Введите пароль"
-          register={register("new_password", registerSchema.password)}
+          register={register("new_password", resetSchema.password)}
         />
         <PasswordInput
           label="Подтвердите пароль"

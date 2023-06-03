@@ -26,7 +26,6 @@ export const routes = {
   profile_settings: createRoute(),
   change_password: createRoute(),
   delete_account: createRoute(),
-  deleted: createRoute(),
 };
 
 export const controls = createRouterControls();
@@ -50,7 +49,6 @@ export const router = createHistoryRouter({
     { path: "/profile/settings", route: routes.profile_settings },
     { path: "/profile/change-password", route: routes.change_password },
     { path: "/profile/delete", route: routes.delete_account },
-    { path: "/profile/deleted", route: routes.deleted },
   ],
   controls,
 });

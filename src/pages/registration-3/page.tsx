@@ -1,4 +1,3 @@
-import { Link } from "atomic-router-react";
 import { useUnit } from "effector-react";
 
 import {
@@ -6,7 +5,6 @@ import {
   thirdRegistrationFormSubmitted,
 } from "~/features/registration";
 
-import { routes } from "~/shared/routing";
 import { Logotype } from "~/shared/ui/logotype.tsx";
 import { VerificationCode } from "~/shared/ui/verification-code.tsx";
 
@@ -41,19 +39,6 @@ function Form() {
         length={6}
         onSubmit={thirdRegistrationFormSubmittedFn}
       />
-      <Bottom />
     </div>
-  );
-}
-
-function Bottom() {
-  return (
-    <p className="w-full text-center text-sm mb-safe">
-      Не получили sms?{" "}
-      <Link to={routes.login} className="text-ce-purple">
-        Отправить код повторно
-      </Link>
-      .
-    </p>
   );
 }
